@@ -1,0 +1,174 @@
+Reactive state data is for data that belongs to a component
+
+props are coming from parent top child, they are just using it to display what the parent component wants it to.
+
+
+Components are used to make more complex code for understandable. The student list code is one for example.
+That code couldve been put into components based on Then add new student area,
+Student List Area,
+and the welcome and bye message
+
+Compoments are used for code with a lot of logic
+can generate components ina v-for loop
+
+Vue components
+    Own template,logic, and can have own css
+    can have parent components, similar to divs in HTML
+    parents can pass data tovthe child components, child stores this as something called PROPS
+    Child components can notify parents of events that happen in that components, BUT NOT OTHER WAY AROUND
+    Children can send events to parents
+
+
+Would you rather become five years older or two years younger?
+
+   Will have one parent and one child
+
+ Components - Where does the code go?
+    SINGLE FILE COMPONENTS
+    each file has a .vue extension
+    each file has template, script, HTML and CSS
+
+How do we connect them together?
+    VITE used to create Vue project
+    FILE NAMES ARE CASE SENSITIVE!!!!!!!!!!!!!!
+
+
+index.html is the main file, however we mostly do not need to change anything here
+Only the title if we want.
+
+style.css is styles applied to EVERYTHING
+Ignore the one that sayd Gitignore
+
+Ignore JSON Apps, they are necessary but I will not do anything
+
+Mostly ignore vite.config.js for this application
+
+Why do we need a server?
+    to work with components, we use one .vue file for each one
+    normal webpages cannot make sense of it, so we use vite and vue
+
+We can use this in real time to update stuff,
+Known as hot module reloading (HMR)
+When ready to deploy it, we will change how it is packaged
+
+
+App. vue is what the whole application is in vue dev tools. Where it says app is where it used to say root
+Hello world is nested in APP, showing the parent and child relationship
+App is parent
+    Hello world is Child
+
+
+
+
+
+<!-- Script Element -->
+<!-- Setup is new, but allows us to not have to return our variables "CONST" -->
+<script setup>
+import { ref } from 'vue'
+
+
+// defineProps is what he parents passed to the child, and it is being stores in a prop
+defineProps({
+  // msg is like varialbe, String is the type of variable, so this would be typing of some sort
+  // The msg is coming from the parent component App.vue, and displaying the message stores in the prop
+  // I think
+  msg: String,
+})
+
+// Same as last week videos
+// Do not need to return count anymore, we have to define it. the setup line above does that for us
+const count = ref(0)
+</script>
+
+
+
+BELOW IS COMMENTS AN EXAMPLE OF A CHILD COMPONENT IN VUE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+<!--Template Element is VUE SPECIFIC for html use, and this is the same as I have been doing -->
+<template>
+  <h1>{{ msg }}</h1>
+
+
+<!--  Card Div Here-->
+  <div class="card">
+<!-- Button Here for counting up -->
+<!-- @click is the same as v-on:click, it is just shorthand -->
+<!-- count++ is adding one to count everytime the button is pushed, just organized differently -->
+    <button type="button" @click="count++">count is {{ count }}</button>
+    <p>
+      Edit
+      <code>components/HelloWorld.vue</code> to test HMR
+    </p>
+  </div>
+
+  <p>
+    Check out
+    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
+      >create-vue</a
+    >, the official Vue + Vite starter
+  </p>
+  <p>
+    Install
+    <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a>
+    in your IDE for a better DX
+  </p>
+  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+</template>
+
+
+
+
+
+
+<!--Style Element-->
+<!-- scoped means specific component and not affecting the whole page -->
+<style scoped>
+.read-the-docs {
+  color: #888;
+}
+</style>
+
+
+
+END OF EXAMPLE CHILD COMPONENT
+
+
+
+
+BELOW IS EXAMPLE OF PARENT COMPONENT
+
+
+
+<script setup>
+import WouldYouRather from './components/./WouldYouRather.vue'
+</script>
+
+<template>
+  <div>
+    <a href="https://vitejs.dev" target="_blank">
+      <img src="/vite.svg" class="logo" alt="Vite logo" />
+    </a>
+    <a href="https://vuejs.org/" target="_blank">
+      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+    </a>
+  </div>
+<!--  HelloWorld sending the msg, to the parent component WouldYouRather.vue, -->
+<!--  So it can be displayed -->
+  <WouldYouRather msg="Would You Rather"/>
+</template>
+
+<style scoped>
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vue:hover {
+  filter: drop-shadow(0 0 2em #42b883aa);
+}
+</style>
